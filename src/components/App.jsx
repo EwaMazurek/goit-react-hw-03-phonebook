@@ -13,11 +13,11 @@ export class App extends Component {
 
   deleteContact = event => {
     let deletedElem = event.target.value;
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(
-        contact => contact.id !== deletedElem
-      ),
-    }));
+    const newArray = this.state.contacts.filter(
+      contact => contact.id !== deletedElem
+    );
+    this.setState({ contacts: newArray });
+    localStorage.setItem('contacts', JSON.stringify(newArray));
   };
 
   generateContact = event => {
