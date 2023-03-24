@@ -5,10 +5,19 @@ import ContactList from './contacts/ContactList';
 import ContactsFilter from './filter/ContactsFilter';
 
 export class App extends Component {
-  savedState = localStorage.getItem('contacts');
   state = {
-    contacts: this.savedState === null ? [] : JSON.parse(this.savedState),
+    contacts: [],
     filter: '',
+  };
+
+  componentDidMount = () => {
+    const savedState = localStorage.getItem('contacts');
+    this.setState({
+      contacts: savedState === null ? [] : JSON.parse(savedState),
+    });
+  };
+  componentDidUpdate = () => {
+    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
   };
 
   deleteContact = event => {
@@ -17,7 +26,6 @@ export class App extends Component {
       contact => contact.id !== deletedElem
     );
     this.setState({ contacts: newArray });
-    localStorage.setItem('contacts', JSON.stringify(newArray));
   };
 
   generateContact = event => {
@@ -36,8 +44,6 @@ export class App extends Component {
       this.setState(prevState => ({
         contacts: [...prevState.contacts, newContact],
       }));
-      const array = [...this.state.contacts, newContact];
-      localStorage.setItem('contacts', JSON.stringify(array));
     }
   };
 
