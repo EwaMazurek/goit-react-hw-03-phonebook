@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 import Form from './form/Form';
 import { nanoid } from 'nanoid';
@@ -68,3 +69,9 @@ export class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  deleteContact: PropTypes.func,
+  generateContact: PropTypes.func,
+  filterContacts: PropTypes.func,
+};

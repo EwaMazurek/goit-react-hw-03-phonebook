@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ContactsFilter extends Component {
   render() {
@@ -15,5 +16,9 @@ class ContactsFilter extends Component {
     );
   }
 }
+
+ContactsFilter.typeProps = {
+  handleFilter: PropTypes.func,
+};
 
 export default ContactsFilter;
